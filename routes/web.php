@@ -36,6 +36,7 @@ Route::post('/edit-profile', UserController::class . '@editProfile');
 Route::post('/edit-pass', UserController::class . '@editPass');
 
 Route::post('/add-to-friend', FriendsController::class . '@addToFriend');
+Route::post('/remove-from-friend', FriendsController::class . '@removeFromFriend');
 Route::post('/is-friend', FriendsController::class . '@isFriend');
 
 Route::delete('/remove-image/{id}', UserController::class . '@removeImage');

@@ -38,6 +38,28 @@ class FriendsController extends Controller
         }
     }
 
+    public function removeFromFriend(Request $request){
+        $removableFriend = Friends::where([
+            ['userId', $request->userId],
+            ['friendId', $request->friendId]
+        ])->orWhere([
+            ['friendId', $request->userId],
+            ['userId', $request->friendId]
+        ])->delete();
+
+        if ($removableFriend) {
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'Friend removed'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Something went wrong'
+            ]);
+        }
+    }
+
     public function isFriend(Request $request){
         $isFriend = Friends::where([
             ['userId', $request->userId],
