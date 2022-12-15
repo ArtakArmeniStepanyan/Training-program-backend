@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FriendsController;
+use App\Http\Controllers\TodosController;
 
 
 /*
@@ -45,3 +46,10 @@ Route::get('/users/{id}', UserController::class . '@getAllUsers');
 Route::get('/users', UserController::class . '@getAllUsersForGuest');
 Route::get('/user/{id}', UserController::class . '@getUser');
 Route::get('/friend/{id}', FriendsController::class . '@getFriends');
+
+Route::post('/add-todo', TodosController::class . '@addTodo');
+Route::get('/get-todos/{id}', TodosController::class . '@getTodos');
+Route::get('/clear-completed/{id}', TodosController::class . '@clearCompleted');
+Route::post('/change-todo-status', TodosController::class . '@changeTodoStatus');
+Route::post('/delete-todo', TodosController::class . '@deleteTodo');
+
