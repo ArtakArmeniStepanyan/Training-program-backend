@@ -9,20 +9,31 @@ use Illuminate\Http\Request;
 class FriendsController extends Controller
 {
     public function getFriends($id){
-        $friends = Friends::where('userId', $id)->with("user")->get();
+        $friends = Friends::where('userId', $id)->with('user')->get();
 
-
-        return response()->json([
+        if ($friends) {
+            return response()->json([
                 'status' => 'ok',
                 'friends' => $friends,
-          ]);
-
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Something went wrong'
+            ]);
+        }
     }
 
     public function addToFriend(Request $request){
         $newFriend = Friends::insert([
+            [
             'userId' => $request->userId,
             'friendId' => $request->friendId,
+            ],
+            [
+                'friendId' => $request->userId,
+                'userId' => $request->friendId,
+            ]
         ]);
 
         if ($newFriend) {
